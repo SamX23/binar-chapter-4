@@ -4,7 +4,7 @@
 :root {
   --nav: rgba(249, 178, 61, 1);
   --bg: rgb(156, 131, 95);
-  --btn-hover: rgba(141, 141, 141, 1);
+  --btn-hover: rgba(196, 196, 196, 1);
 }
 
 h1,
@@ -24,24 +24,41 @@ body {
   font-size: 4rem;
 }
 
+img {
+  width: 100%;
+}
+
 nav,
 .title {
   display: flex;
   align-items: center;
 }
 
+nav {
+  margin: 1rem;
+}
+
+.title div {
+  margin: 0 1rem;
+}
+
 .back_button h2 {
-  font-size: 72px;
+  font-size: 1em;
   line-height: 98px;
   letter-spacing: 0.1em;
   color: rgba(114, 76, 33, 1);
 }
 
 .title_text h1 {
-  font-size: 36px;
+  font-size: 0.5em;
   line-height: 49px;
   text-align: center;
   color: var(--nav);
+}
+
+.title_logo {
+  display: flex;
+  width: 5rem;
 }
 
 .main {
@@ -49,30 +66,73 @@ nav,
   height: 75vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 2rem;
+  column-gap: 0.5rem;
 }
 
-.games {
+.player {
+  align-self: center;
+}
+
+.user_choice {
   display: grid;
-  grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr;
+  row-gap: 0.5rem;
+  justify-content: center;
+}
+
+.user_choice button {
+  background: unset;
+  border: unset;
+  width: 10rem;
+  padding: 1rem 1rem;
+}
+
+.user_choice button:hover {
+  background-color: var(--btn-hover);
+  border-radius: 10%;
+}
+
+.user_title {
+  text-align: center;
+  padding: 1rem;
 }
 
 .user_title h2 {
-  font-size: 36px;
+  font-size: 0.5em;
   line-height: 49px;
   text-align: center;
   letter-spacing: 0.1em;
 }
 
 .versus {
-  align-self: center;
-  color: rgba(189, 0, 0, 1);
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
 }
 
-.versus h1 {
-  font-size: 144px;
+.versus > h1 {
+  color: rgba(189, 0, 0, 1);
+  font-size: 2em;
   line-height: 196px;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+.versus_status {
+  background-color: rgba(76, 150, 84, 1);
+  border-radius: 10px;
+  height: 10rem;
+  display: flex;
+  transform: rotate(-28.87deg);
+}
+
+.versus_status h1 {
+  margin: auto;
+  color: white;
+  font-size: 38px;
+  line-height: 52px;
   text-align: center;
   letter-spacing: 0.1em;
 }
@@ -82,4 +142,13 @@ nav,
   bottom: 0;
   left: 0;
   right: 0;
+  display: flex;
+}
+
+.reset button {
+  margin: auto;
+  display: flex;
+  background: unset;
+  border: unset;
+  width: 5rem;
 }
