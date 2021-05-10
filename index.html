@@ -37,31 +37,27 @@
         <!-- Player section start -->
         <div class="player">
           <div class="user_title">
-            <h2>PLAYER 1</h2>
+            <h2>PLAYER</h2>
           </div>
           <div class="user_choice">
-            <button>
-              <img src="./assets/batu.png" alt="" />
+            <button id="batu-player">
+              <img src="./assets/batu.png" alt="batu" />
             </button>
 
-            <button>
-              <img src="./assets/kertas.png" alt="" />
+            <button id="kertas-player">
+              <img src="./assets/kertas.png" alt="kertas" />
             </button>
 
-            <button>
-              <img src="./assets/gunting.png" alt="" />
+            <button id="gunting-player">
+              <img src="./assets/gunting.png" alt="gunting" />
             </button>
           </div>
         </div>
         <!-- Player section end -->
 
         <!-- Versus section start -->
-        <div class="versus">
-          <h1>VS</h1>
-          <div class="versus_status">
-            <h1>PLAYER 1 WIN</h1>
-          </div>
-        </div>
+        <div id="vs_result" class="versus"></div>
+
         <!-- Versus section end-->
 
         <!-- Com section start -->
@@ -70,16 +66,16 @@
             <h2>COM</h2>
           </div>
           <div class="user_choice">
-            <button>
-              <img src="./assets/batu.png" alt="" />
+            <button id="batu-com">
+              <img src="./assets/batu.png" alt="batu" />
             </button>
 
-            <button>
-              <img src="./assets/kertas.png" alt="" />
+            <button id="kertas-com">
+              <img src="./assets/kertas.png" alt="kertas" />
             </button>
 
-            <button>
-              <img src="./assets/gunting.png" alt="" />
+            <button id="gunting-com">
+              <img src="./assets/gunting.png" alt="gunting" />
             </button>
           </div>
         </div>
@@ -87,7 +83,7 @@
 
         <!-- Reset button start -->
         <div class="reset">
-          <button type="reset">
+          <button id="reset" type="reset">
             <img src="./assets/refresh.png" alt="" />
           </button>
         </div>
@@ -95,9 +91,5 @@
       </main>
     </div>
   </body>
-  <script
-    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-    crossorigin="anonymous"
-  ></script>
+  <script src="script.js"></script>
 </html>
