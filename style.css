@@ -120,21 +120,24 @@ nav {
   letter-spacing: 0.1em;
 }
 
-.versus_status {
+.versus_result {
   background-color: rgba(76, 150, 84, 1);
   border-radius: 10px;
   height: 10rem;
-  display: flex;
   transform: rotate(-28.87deg);
 }
 
-.versus_status h1 {
+.versus_result h1 {
   margin: auto;
   color: white;
   font-size: 38px;
   line-height: 52px;
   text-align: center;
   letter-spacing: 0.1em;
+}
+
+.draw {
+  background-color: rgb(3, 91, 12);
 }
 
 .reset {
