@@ -1,0 +1,85 @@
+/* Global Styling */
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&display=swap");
+
+:root {
+  --nav: rgba(249, 178, 61, 1);
+  --bg: rgb(156, 131, 95);
+  --btn-hover: rgba(141, 141, 141, 1);
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  font-size: 4rem;
+}
+
+nav,
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.back_button h2 {
+  font-size: 72px;
+  line-height: 98px;
+  letter-spacing: 0.1em;
+  color: rgba(114, 76, 33, 1);
+}
+
+.title_text h1 {
+  font-size: 36px;
+  line-height: 49px;
+  text-align: center;
+  color: var(--nav);
+}
+
+.main {
+  position: relative;
+  height: 75vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2rem;
+}
+
+.games {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.user_title h2 {
+  font-size: 36px;
+  line-height: 49px;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+.versus {
+  align-self: center;
+  color: rgba(189, 0, 0, 1);
+}
+
+.versus h1 {
+  font-size: 144px;
+  line-height: 196px;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+.reset {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
