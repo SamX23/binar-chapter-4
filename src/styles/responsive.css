@@ -1,0 +1,178 @@
+@media (min-width: 1196px) {
+  .table_bg table {
+    width: 28rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 !important;
+  }
+
+  .games_Desc {
+    display: grid;
+    grid-template-rows: auto;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .games_Title,
+  .games_slider {
+    width: 100% !important;
+  }
+
+  .features_Avatar {
+    display: none;
+  }
+
+  .feature_description {
+    width: 100% !important;
+    background-color: rgb(0 0 0 / 66%);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 1rem;
+  }
+
+  .requirements_SectionDetails {
+    width: 100% !important;
+  }
+
+  .requirements_SectionSpace {
+    display: none;
+  }
+
+  .newsletter_form {
+    text-align: center;
+  }
+
+  .newsletter_Form button {
+    padding: 0 !important;
+  }
+
+  .footer_nav {
+    grid-template-columns: unset;
+    grid-template-rows: auto;
+    padding: 1rem 0;
+  }
+
+  .footer_navLeft {
+    padding: unset;
+    margin: auto;
+  }
+
+  .footer_navRight {
+    margin: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  nav,
+  .navbar-nav {
+    background-color: rgb(0, 0, 0);
+  }
+
+  .nav-item {
+    padding-left: 1rem;
+  }
+
+  .topscores_Description,
+  .topscores_Cards {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .topscores_Cards {
+    align-content: space-around;
+  }
+
+  .topscores_Cards > .row {
+    justify-content: unset;
+  }
+
+  .footer_images {
+    display: none;
+  }
+
+  .footer_newsletter {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .features_Title {
+    text-align: center;
+  }
+
+  .topscores_Section {
+    padding-bottom: 4rem;
+  }
+
+  .features_Title h1,
+  .requirements_SectionDetails h1 {
+    font-size: 2.5rem !important;
+    text-align: center;
+  }
+
+  .card {
+    position: unset !important;
+  }
+
+  .table_bg {
+    width: 20rem !important;
+    height: unset !important;
+    margin: auto;
+  }
+
+  .table_bg table {
+    margin: auto;
+    font-size: 0.7rem;
+  }
+
+  table h5 {
+    font-size: 1rem;
+  }
+
+  .table_bg table td p {
+    margin-bottom: 0;
+  }
+
+  .topscores_Button {
+    margin: auto;
+  }
+
+  .topscores_Cards {
+    justify-content: center;
+  }
+
+  .footer_nav {
+    grid-template-columns: 1fr !important;
+  }
+
+  .footer_navLeft {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero_Title > h1 {
+    font-size: 3.5rem;
+  }
+
+  .description_Item p {
+    font-size: 0.74rem !important;
+  }
+
+  .games_Section,
+  .requirements_Section {
+    padding-top: 5rem;
+  }
+
+  .topscores_Section,
+  main {
+    display: inline-block !important;
+  }
+
+  .requirements_SectionDetails {
+    margin-bottom: 7rem;
+  }
+}

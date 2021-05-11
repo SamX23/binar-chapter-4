@@ -42,6 +42,10 @@ nav {
   margin: 0 1rem;
 }
 
+.back_button a {
+  text-decoration: none;
+}
+
 .back_button h2 {
   font-size: 1em;
   line-height: 98px;
