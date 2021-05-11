@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="./src/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./src/styles/games.css" rel="stylesheet" />
+    <title>Try Out The Games</title>
+  </head>
+  <body>
+    <!-- Header start -->
+    <header>
+      <nav>
+        <div class="back_button">
+          <a href="/index.html">
+            <h2><</h2>
+          </a>
+        </div>
+        <div class="title">
+          <div class="title_logo">
+            <img src="./src/assets/images/logo.png" alt="" />
+          </div>
+          <div class="title_text">
+            <h1>ROCK PAPER SCRISSORS</h1>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- Header end -->
+
+    <div class="container">
+      <main class="main">
+        <!-- Player section start -->
+        <div class="player">
+          <div class="user_title">
+            <h2>PLAYER</h2>
+          </div>
+          <div class="user_choice">
+            <button id="batu-player">
+              <img src="./src/assets/images/batu.png" alt="batu" />
+            </button>
+
+            <button id="kertas-player">
+              <img src="./src/assets/images/kertas.png" alt="kertas" />
+            </button>
+
+            <button id="gunting-player">
+              <img src="./src/assets/images/gunting.png" alt="gunting" />
+            </button>
+          </div>
+        </div>
+        <!-- Player section end -->
+
+        <!-- Versus section start -->
+        <div id="vs_result" class="versus"></div>
+        <!-- Versus section end-->
+
+        <!-- Com section start -->
+        <div class="player">
+          <div class="user_title">
+            <h2>COM</h2>
+          </div>
+          <div class="user_choice">
+            <button id="batu-com">
+              <img src="./src/assets/images/batu.png" alt="batu" />
+            </button>
+
+            <button id="kertas-com">
+              <img src="./src/assets/images/kertas.png" alt="kertas" />
+            </button>
+
+            <button id="gunting-com">
+              <img src="./src/assets/images/gunting.png" alt="gunting" />
+            </button>
+          </div>
+        </div>
+        <!-- Com section end-->
+
+        <!-- Reset button start -->
+        <div class="reset">
+          <button id="reset" type="reset">
+            <img src="./src/assets/images/refresh.png" alt="" />
+          </button>
+        </div>
+        <!-- Reset button end -->
+      </main>
+    </div>
+  </body>
+  <!-- <script src="./src/scripts/script.js"></script> -->
+  <script src="./src/scripts/scriptBasic.js"></script>
+</html>
