@@ -85,11 +85,15 @@ nav {
   border: unset;
   width: 10rem;
   padding: 1rem 1rem;
+  border-radius: 10%;
 }
 
 .user_choice button:hover {
   background-color: var(--btn-hover);
-  border-radius: 10%;
+}
+
+.active_choice {
+  background-color: var(--btn-hover) !important;
 }
 
 .user_title {
