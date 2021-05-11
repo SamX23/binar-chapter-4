@@ -1,98 +1,116 @@
-// Initiation
-let playerPick;
-let comPick;
-let resultState = [];
-// Player
-const batu = document.getElementById("batu-player");
-const kertas = document.getElementById("kertas-player");
-const gunting = document.getElementById("gunting-player");
-// Com
-const batuCom = document.getElementById("batu-com");
-const kertasCom = document.getElementById("kertas-com");
-const guntingCom = document.getElementById("gunting-com");
-// Result initiation
-const resultText = document.createElement("H1");
-const resultContainer = document.getElementById("vs_result");
-// Reset Button
-const resetResult = document.getElementById("reset");
-
-// Add listener to button picker
-batu.addEventListener("click", () => {
-  playerPick = "batu";
-  console.log("batu");
-  play();
-});
-kertas.addEventListener("click", () => {
-  playerPick = "kertas";
-  console.log("kertas");
-  play();
-});
-gunting.addEventListener("click", () => {
-  playerPick = "gunting";
-  console.log("gunting");
-  play();
-});
-
-batuCom.addEventListener("click", () => console.log("batu-com"));
-kertasCom.addEventListener("click", () => console.log("kertas-com"));
-guntingCom.addEventListener("click", () => console.log("gunting-com"));
-
-// Normal result
-const defaultResult = () => {
-  resultText.innerHTML = "VS";
-  resultContainer.appendChild(resultText);
-  resultContainer.classList.remove("versus_result");
-  resultContainer.classList.remove("draw");
-};
-
-// Win result
-const winResult = () => {
-  resultText.innerHTML = "PLAYER WIN";
-  resultContainer.appendChild(resultText);
-  resultContainer.classList.add("versus_result");
-  resultContainer.classList.remove("draw");
-};
-
-// Lose result
-const loseResult = () => {
-  resultText.innerHTML = "COM WIN";
-  resultContainer.appendChild(resultText);
-  resultContainer.classList.add("versus_result");
-  resultContainer.classList.remove("draw");
-};
-
-// Draw result
-const drawResult = () => {
-  resultText.innerHTML = "DRAW";
-  resultContainer.appendChild(resultText);
-  resultContainer.classList.add("versus_result");
-  resultContainer.classList.add("draw");
-};
-
-// Reset Result
-resetResult.addEventListener("click", () => defaultResult());
-
-// Result switch
-const play = () => {
-  switch (playerPick) {
-    case "batu":
-      winResult();
-      break;
-
-    case "kertas":
-      loseResult();
-      break;
-
-    case "gunting":
-      drawResult();
-      break;
-
-    default:
-      defaultResult();
-      break;
+class Player {
+  constructor() {
+    this.choice = "none";
+    this.batu = document.getElementById("batu-player");
+    this.kertas = document.getElementById("kertas-player");
+    this.gunting = document.getElementById("gunting-player");
+    this._initiation();
   }
-};
 
-play();
+  _initiation() {
+    this.batu.addEventListener("click", () => {
+      this.choice = "batu";
+      console.log(this.choice);
+    });
+    this.kertas.addEventListener("click", () => {
+      this.choice = "kertas";
+      console.log(this.choice);
+    });
+    this.gunting.addEventListener("click", () => {
+      this.choice = "gunting";
+      console.log(this.choice);
+    });
+  }
+}
 
-console.log("Script jalan");
+class Bot {
+  constructor() {
+    this.choice = "none";
+    this.batu = document.getElementById("batu-com");
+    this.kertas = document.getElementById("kertas-com");
+    this.gunting = document.getElementById("gunting-com");
+    this._initiation();
+  }
+
+  _initiation() {
+    this.batu.addEventListener("click", () => {
+      this.choice = "batu";
+      console.log(this.choice);
+    });
+    this.kertas.addEventListener("click", () => {
+      this.choice = "kertas";
+      console.log(this.choice);
+    });
+    this.gunting.addEventListener("click", () => {
+      this.choice = "gunting";
+      console.log(this.choice);
+    });
+  }
+}
+
+class Game {
+  constructor() {
+    this.result = [];
+    this.resultText = document.createElement("H1");
+    this.resultContainer = document.getElementById("vs_result");
+    this.resetResult = document.getElementById("reset");
+    this._initiation();
+  }
+
+  _initiation() {
+    this.resetResult.addEventListener("click", () => {
+      console.log("reset");
+      this._defaultResult();
+    });
+  }
+
+  _defaultResult = () => {
+    this.resultText.innerHTML = "VS";
+    this.resultContainer.appendChild(this.resultText);
+    this.resultContainer.classList.remove("versus_result");
+    this.resultContainer.classList.remove("draw");
+  };
+  _winResult = () => {
+    this.resultText.innerHTML = "PLAYER WIN";
+    this.resultContainer.appendChild(this.resultText);
+    this.resultContainer.classList.add("versus_result");
+    this.resultContainer.classList.remove("draw");
+  };
+  _loseResult = () => {
+    this.resultText.innerHTML = "COM WIN";
+    this.resultContainer.appendChild(this.resultText);
+    this.resultContainer.classList.add("versus_result");
+    this.resultContainer.classList.remove("draw");
+  };
+  _drawResult = () => {
+    this.resultText.innerHTML = "DRAW";
+    this.resultContainer.appendChild(this.resultText);
+    this.resultContainer.classList.add("versus_result");
+    this.resultContainer.classList.add("draw");
+  };
+
+  play() {
+    const user = new Player();
+    const bot = new Bot();
+
+    switch (user.choice) {
+      case "batu":
+        this._winResult();
+
+      case "kertas":
+        this._loseResult();
+
+      case "gunting":
+        this._drawResult();
+
+      default:
+        this._defaultResult();
+        break;
+    }
+
+    console.log("Script jalan");
+  }
+}
+
+const go = new Game();
+go.play();
