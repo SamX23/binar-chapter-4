@@ -116,19 +116,19 @@ class Game extends Rules {
 
   getUserPick = (choice) => {
     this.user.choice = choice;
-    this.playerHasPick = true;
+    this.playerHasPick = !this.playerHasPick;
     console.log("Player pick: ", this.user.choice);
     return this.user.choice;
   };
 
   getComPick = (choice) => {
     this.com.choice = choice;
-    this.comHasPick = true;
+    this.comHasPick = !this.playerHasPick;
     console.log("Com pick: ", this.com.choice);
     return this.com.choice;
   };
 
-  listener = () => {
+  setPlayerListener = () => {
     this.user.batu[0].addEventListener("click", () => {
       this.result[0] = this.getUserPick("batu");
       this.decideResult();
@@ -143,21 +143,21 @@ class Game extends Rules {
       this.result[0] = this.getUserPick("gunting");
       this.decideResult();
     });
+  };
 
-    if (this.playerHasPick) {
-      this.com.batu[1].addEventListener("click", () => {
-        this.result[1] = this.getComPick("batu");
-        this.decideResult();
-      });
-      this.com.kertas[1].addEventListener("click", () => {
-        this.result[1] = this.getComPick("kertas");
-        this.decideResult();
-      });
-      this.com.gunting[1].addEventListener("click", () => {
-        this.result[1] = this.getComPick("gunting");
-        this.decideResult();
-      });
-    }
+  setComListener = () => {
+    this.com.batu[1].addEventListener("click", () => {
+      this.result[1] = this.getComPick("batu");
+      this.decideResult();
+    });
+    this.com.kertas[1].addEventListener("click", () => {
+      this.result[1] = this.getComPick("kertas");
+      this.decideResult();
+    });
+    this.com.gunting[1].addEventListener("click", () => {
+      this.result[1] = this.getComPick("gunting");
+      this.decideResult();
+    });
   };
 
   decideResult() {
@@ -189,7 +189,9 @@ class Game extends Rules {
 
   play() {
     console.log("Lets play!");
-    this.listener();
+    console.log("Has player pick ? ", this.playerHasPick);
+    this.setPlayerListener();
+    this.decideResult();
   }
 }
 
