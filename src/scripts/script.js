@@ -68,7 +68,11 @@ class Rules {
   };
 
   decision = (userChoice, botChoice) => {
-    if (userChoice === botChoice) {
+    if (
+      (userChoice === "batu" && botChoice === "batu") ||
+      (userChoice === "kertas" && botChoice === "kertas") ||
+      (userChoice === "gunting" && botChoice === "gunting")
+    ) {
       return this.drawResult();
     } else if (
       (userChoice === "batu" && botChoice === "gunting") ||
@@ -90,7 +94,6 @@ class Game extends Rules {
   constructor() {
     super();
     this.result = [];
-    this.playerHasPick = false;
     this.resetResult = document.getElementById("reset");
     this._initiation();
   }
@@ -106,24 +109,24 @@ class Game extends Rules {
     this.resetResult.addEventListener("click", () => {
       this.defaultResult();
       this.result = [];
-      this.playerHasPick = false;
-      this.user.batu[0].classList.remove("active_choice");
-      this.user.kertas[0].classList.remove("active_choice");
-      this.user.gunting[0].classList.remove("active_choice");
+      this.user.choice, (this.com.choice = null);
+      document.querySelectorAll(".choice").forEach((x) => {
+        x.classList.remove("active_choice");
+        x.disabled = false;
+      });
+      this.decideResult();
       console.log("reset");
     });
   }
 
   getUserPick = (choice) => {
     this.user.choice = choice;
-    this.playerHasPick = !this.playerHasPick;
     console.log("Player pick: ", this.user.choice);
     return this.user.choice;
   };
 
   getComPick = (choice) => {
     this.com.choice = choice;
-    this.comHasPick = !this.playerHasPick;
     console.log("Com pick: ", this.com.choice);
     return this.com.choice;
   };
@@ -131,16 +134,25 @@ class Game extends Rules {
   setPlayerListener = () => {
     this.user.batu[0].addEventListener("click", () => {
       this.result[0] = this.getUserPick("batu");
+      this.user.batu[0].classList.add("active_choice");
+      this.user.kertas[0].classList.remove("active_choice");
+      this.user.gunting[0].classList.remove("active_choice");
       this.decideResult();
     });
 
     this.user.kertas[0].addEventListener("click", () => {
       this.result[0] = this.getUserPick("kertas");
+      this.user.batu[0].classList.remove("active_choice");
+      this.user.kertas[0].classList.add("active_choice");
+      this.user.gunting[0].classList.remove("active_choice");
       this.decideResult();
     });
 
     this.user.gunting[0].addEventListener("click", () => {
       this.result[0] = this.getUserPick("gunting");
+      this.user.batu[0].classList.remove("active_choice");
+      this.user.kertas[0].classList.remove("active_choice");
+      this.user.gunting[0].classList.add("active_choice");
       this.decideResult();
     });
   };
@@ -148,50 +160,43 @@ class Game extends Rules {
   setComListener = () => {
     this.com.batu[1].addEventListener("click", () => {
       this.result[1] = this.getComPick("batu");
+      this.com.batu[1].classList.add("active_choice");
+      this.com.kertas[1].classList.remove("active_choice");
+      this.com.gunting[1].classList.remove("active_choice");
       this.decideResult();
     });
     this.com.kertas[1].addEventListener("click", () => {
       this.result[1] = this.getComPick("kertas");
+      this.com.batu[1].classList.remove("active_choice");
+      this.com.kertas[1].classList.add("active_choice");
+      this.com.gunting[1].classList.remove("active_choice");
       this.decideResult();
     });
     this.com.gunting[1].addEventListener("click", () => {
       this.result[1] = this.getComPick("gunting");
+      this.com.batu[1].classList.remove("active_choice");
+      this.com.kertas[1].classList.remove("active_choice");
+      this.com.gunting[1].classList.add("active_choice");
       this.decideResult();
     });
   };
 
   decideResult() {
     console.log("Current result: ", this.result);
-    switch (this.user.choice) {
-      case "batu":
-        this.winResult();
-        this.user.batu[0].classList.add("active_choice");
-        this.user.kertas[0].classList.remove("active_choice");
-        this.user.gunting[0].classList.remove("active_choice");
-        break;
-      case "kertas":
-        this.loseResult();
-        this.user.batu[0].classList.remove("active_choice");
-        this.user.kertas[0].classList.add("active_choice");
-        this.user.gunting[0].classList.remove("active_choice");
-        break;
-      case "gunting":
-        this.drawResult();
-        this.user.batu[0].classList.remove("active_choice");
-        this.user.kertas[0].classList.remove("active_choice");
-        this.user.gunting[0].classList.add("active_choice");
-        break;
-      default:
-        this.defaultResult();
-        break;
+
+    if (this.user.choice !== null) {
+      this.setComListener();
+    }
+
+    if (this.user.choice && this.com.choice) {
+      this.decision(this.user.choice, this.com.choice);
+      document.querySelectorAll(".choice").forEach((x) => (x.disabled = true));
     }
   }
 
   play() {
     console.log("Lets play!");
-    console.log("Has player pick ? ", this.playerHasPick);
     this.setPlayerListener();
-    this.decideResult();
   }
 }
 
