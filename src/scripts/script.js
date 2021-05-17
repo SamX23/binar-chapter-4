@@ -40,31 +40,31 @@ class Rules {
   }
 
   defaultResult = () => {
+    this.resultContainer.classList.remove("draw");
+    this.resultContainer.classList.remove("versus_result");
     this.resultText.innerHTML = "VS";
     this.resultContainer.appendChild(this.resultText);
-    this.resultContainer.classList.remove("versus_result");
-    this.resultContainer.classList.remove("draw");
   };
 
   winResult = () => {
+    this.resultContainer.classList.remove("draw");
+    this.resultContainer.classList.add("versus_result");
     this.resultText.innerHTML = "PLAYER WIN";
     this.resultContainer.appendChild(this.resultText);
-    this.resultContainer.classList.add("versus_result");
-    this.resultContainer.classList.remove("draw");
   };
 
   loseResult = () => {
+    this.resultContainer.classList.remove("draw");
+    this.resultContainer.classList.add("versus_result");
     this.resultText.innerHTML = "COM WIN";
     this.resultContainer.appendChild(this.resultText);
-    this.resultContainer.classList.add("versus_result");
-    this.resultContainer.classList.remove("draw");
   };
 
   drawResult = () => {
-    this.resultText.innerHTML = "DRAW";
-    this.resultContainer.appendChild(this.resultText);
     this.resultContainer.classList.add("versus_result");
     this.resultContainer.classList.add("draw");
+    this.resultText.innerHTML = "DRAW";
+    this.resultContainer.appendChild(this.resultText);
   };
 
   decision = (userChoice, botChoice) => {
@@ -108,13 +108,12 @@ class Game extends Rules {
   reset() {
     this.resetResult.addEventListener("click", () => {
       this.defaultResult();
-      this.result = [];
+      this.result.splice(0, this.result.length);
       this.user.choice, (this.com.choice = null);
       document.querySelectorAll(".choice").forEach((x) => {
         x.classList.remove("active_choice");
         x.disabled = false;
       });
-      this.decideResult();
       console.log("reset");
     });
   }
@@ -184,7 +183,7 @@ class Game extends Rules {
   decideResult() {
     console.log("Current result: ", this.result);
 
-    if (this.user.choice !== null) {
+    if (this.user.choice !== null && !this.com.choice) {
       this.setComListener();
     }
 
