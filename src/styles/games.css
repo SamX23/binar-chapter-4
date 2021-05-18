@@ -3,8 +3,10 @@
 
 :root {
   --nav: rgba(249, 178, 61, 1);
-  --bg: rgb(156, 131, 95);
+  --bg: rgba(156, 131, 95, 1);
   --btn-hover: rgba(196, 196, 196, 1);
+  --skin: rgb(249, 211, 186);
+  --black: rgba(51, 44, 43, 1);
 }
 
 h1,
@@ -72,7 +74,6 @@ nav {
   height: 75vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 0.5rem;
 }
 
 .player {
@@ -89,13 +90,20 @@ nav {
 .user_choice button {
   background: unset;
   border: unset;
-  width: 10rem;
+  max-width: 9rem;
+  width: 100%;
+  min-width: 4rem;
   padding: 1rem 1rem;
   border-radius: 10%;
 }
 
 .user_choice button:hover {
-  background-color: var(--btn-hover);
+  background-color: var(--skin);
+}
+
+.user_choice > button:active,
+.reset button:active {
+  transform: translate(0, 5px);
 }
 
 .active_choice {
@@ -112,22 +120,24 @@ nav {
   line-height: 49px;
   text-align: center;
   letter-spacing: 0.1em;
+  color: var(--black);
+  border-bottom: 0.5rem dashed var(--skin);
 }
 
 .versus {
-  width: 15rem;
+  max-width: 15rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: auto;
+  z-index: 99;
 }
 
 .versus > h1 {
   color: rgba(189, 0, 0, 1);
-  font-size: 2em;
-  line-height: 196px;
+  font-size: 1.5em;
   text-align: center;
-  letter-spacing: 0.1em;
+  padding: 0 0.5rem;
 }
 
 .versus_result {
