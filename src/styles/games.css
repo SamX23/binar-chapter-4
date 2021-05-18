@@ -26,6 +26,7 @@ body {
 
 img {
   width: 100%;
+  height: auto;
 }
 
 nav,
@@ -58,6 +59,7 @@ nav {
   line-height: 49px;
   text-align: center;
   color: var(--nav);
+  text-shadow: 2px 1px #000000;
 }
 
 .title_logo {
