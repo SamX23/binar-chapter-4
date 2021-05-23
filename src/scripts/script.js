@@ -88,6 +88,8 @@ class Rules {
       return this.loseResult();
     }
   };
+
+  randomizer = (max) => Math.floor(Math.random() * max);
 }
 
 class Game extends Rules {
