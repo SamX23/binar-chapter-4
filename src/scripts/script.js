@@ -105,19 +105,7 @@ class Game extends Rules {
     this.com = new Bot();
     this.defaultResult();
     this.reset();
-  }
-
-  reset() {
-    this.resetResult.addEventListener("click", () => {
-      this.defaultResult();
-      this.result.splice(0, this.result.length);
-      this.user.choice, (this.com.choice = null);
-      document.querySelectorAll(".choice").forEach((x) => {
-        x.classList.remove("active_choice");
-        x.disabled = false;
-      });
-      console.log("reset");
-    });
+    console.log("Game Initiated");
   }
 
   getUserPick = (choice) => {
@@ -138,6 +126,7 @@ class Game extends Rules {
       this.user.batu[0].classList.add("active_choice");
       this.user.kertas[0].classList.remove("active_choice");
       this.user.gunting[0].classList.remove("active_choice");
+      this.removePlayerListener();
       this.decideResult();
     });
 
@@ -146,6 +135,7 @@ class Game extends Rules {
       this.user.batu[0].classList.remove("active_choice");
       this.user.kertas[0].classList.add("active_choice");
       this.user.gunting[0].classList.remove("active_choice");
+      this.removePlayerListener();
       this.decideResult();
     });
 
@@ -154,6 +144,7 @@ class Game extends Rules {
       this.user.batu[0].classList.remove("active_choice");
       this.user.kertas[0].classList.remove("active_choice");
       this.user.gunting[0].classList.add("active_choice");
+      this.removePlayerListener();
       this.decideResult();
     });
   };
@@ -182,6 +173,18 @@ class Game extends Rules {
     });
   };
 
+  removePlayerListener = () => {
+    document.getElementsByClassName("batu")[0].disabled = true;
+    document.getElementsByClassName("kertas")[0].disabled = true;
+    document.getElementsByClassName("gunting")[0].disabled = true;
+  };
+
+  removeComListener = () => {
+    document.getElementsByClassName("batu")[1].disabled = true;
+    document.getElementsByClassName("kertas")[1].disabled = true;
+    document.getElementsByClassName("gunting")[1].disabled = true;
+  };
+
   decideResult() {
     console.log("Current result: ", this.result);
 
@@ -198,6 +201,19 @@ class Game extends Rules {
   play() {
     console.log("Lets play!");
     this.setPlayerListener();
+  }
+
+  reset() {
+    this.resetResult.addEventListener("click", () => {
+      this.defaultResult();
+      this.result.splice(0, this.result.length);
+      this.user.choice, (this.com.choice = null);
+      document.querySelectorAll(".choice").forEach((x) => {
+        x.classList.remove("active_choice");
+        x.disabled = false;
+      });
+      console.log("reset");
+    });
   }
 }
 
