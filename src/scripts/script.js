@@ -1,6 +1,5 @@
 class Player {
   constructor() {
-    this.choice;
     this.batu = document.getElementsByClassName("batu");
     this.kertas = document.getElementsByClassName("kertas");
     this.gunting = document.getElementsByClassName("gunting");
@@ -8,8 +7,8 @@ class Player {
 }
 
 class Human extends Player {
-  constructor(choice, batu, kertas, gunting) {
-    super(choice, batu, kertas, gunting);
+  constructor(batu, kertas, gunting) {
+    super(batu, kertas, gunting);
     this._initiation();
   }
 
@@ -21,8 +20,8 @@ class Human extends Player {
 }
 
 class Bot extends Player {
-  constructor(choice, batu, kertas, gunting) {
-    super(choice, batu, kertas, gunting);
+  constructor(batu, kertas, gunting) {
+    super(batu, kertas, gunting);
     this._initiation();
   }
 
@@ -37,6 +36,8 @@ class Rules {
   constructor() {
     this.resultText = document.createElement("H1");
     this.resultContainer = document.getElementById("vs_result");
+    this.user_choice;
+    this.com_choice;
   }
 
   defaultState = () => {
@@ -44,6 +45,8 @@ class Rules {
     this.resultContainer.classList.remove("versus_result");
     this.resultText.innerHTML = "VS";
     this.resultContainer.appendChild(this.resultText);
+    this.user_choice = null;
+    this.com_choice = null;
   };
 
   _winResult = () => {
@@ -96,9 +99,8 @@ class Rules {
 }
 
 class Game extends Rules {
-  constructor() {
-    super();
-    this.result = [];
+  constructor(user_choice, com_choice) {
+    super(user_choice, com_choice);
     this.resetResult = document.getElementById("reset");
     this._initiation();
   }
@@ -108,24 +110,23 @@ class Game extends Rules {
     this.com = new Bot();
     this.defaultState();
     this.reset();
-    console.log("Game Initiated");
   }
 
   getUserPick = (choice) => {
-    this.user.choice = choice;
-    console.log("Player pick: ", this.user.choice);
-    return this.user.choice;
+    this.user_choice = choice;
+    console.log("Player pick: ", this.user_choice);
+    return this.user_choice;
   };
 
   getComPick = (choice) => {
-    this.com.choice = choice;
-    console.log("Com pick: ", this.com.choice);
-    return this.com.choice;
+    this.com_choice = choice;
+    console.log("Com pick: ", this.com_choice);
+    return this.com_choice;
   };
 
   setPlayerListener = () => {
     this.user.batu[0].onclick = () => {
-      this.result[0] = this.getUserPick("batu");
+      this.getUserPick("batu");
       this.user.batu[0].classList.add("active_choice");
       this.user.kertas[0].classList.remove("active_choice");
       this.user.gunting[0].classList.remove("active_choice");
@@ -134,7 +135,7 @@ class Game extends Rules {
     };
 
     this.user.kertas[0].onclick = () => {
-      this.result[0] = this.getUserPick("kertas");
+      this.getUserPick("kertas");
       this.user.batu[0].classList.remove("active_choice");
       this.user.kertas[0].classList.add("active_choice");
       this.user.gunting[0].classList.remove("active_choice");
@@ -143,7 +144,7 @@ class Game extends Rules {
     };
 
     this.user.gunting[0].onclick = () => {
-      this.result[0] = this.getUserPick("gunting");
+      this.getUserPick("gunting");
       this.user.batu[0].classList.remove("active_choice");
       this.user.kertas[0].classList.remove("active_choice");
       this.user.gunting[0].classList.add("active_choice");
@@ -154,24 +155,27 @@ class Game extends Rules {
 
   setComListener = () => {
     this.com.batu[1].onclick = () => {
-      this.result[1] = this.getComPick("batu");
+      this.getComPick("batu");
       this.com.batu[1].classList.add("active_choice");
       this.com.kertas[1].classList.remove("active_choice");
       this.com.gunting[1].classList.remove("active_choice");
+      this.removeComListener();
       this.decideResult();
     };
     this.com.kertas[1].onclick = () => {
-      this.result[1] = this.getComPick("kertas");
+      this.getComPick("kertas");
       this.com.batu[1].classList.remove("active_choice");
       this.com.kertas[1].classList.add("active_choice");
       this.com.gunting[1].classList.remove("active_choice");
+      this.removeComListener();
       this.decideResult();
     };
     this.com.gunting[1].onclick = () => {
-      this.result[1] = this.getComPick("gunting");
+      this.getComPick("gunting");
       this.com.batu[1].classList.remove("active_choice");
       this.com.kertas[1].classList.remove("active_choice");
       this.com.gunting[1].classList.add("active_choice");
+      this.removeComListener();
       this.decideResult();
     };
   };
@@ -189,35 +193,41 @@ class Game extends Rules {
   };
 
   decideResult() {
-    console.log("Current result: ", this.result);
-
-    if (this.user.choice !== null && !this.com.choice) {
+    console.log("Current result: ", this.user_choice, this.com_choice);
+    if (this.user_choice != null) {
       this.setComListener();
+      // console.log("added com listener", this.user_choice, this.com_choice);
+    } else if (this.user_choice == null) {
+      this.removeComListener();
+      // console.log("remove com listener", this.user_choice, this.com_choice);
     }
 
-    if (this.user.choice && this.com.choice) {
-      this.decision(this.user.choice, this.com.choice);
+    if (this.user_choice && this.com_choice) {
+      this.decision(this.user_choice, this.com_choice);
       document.querySelectorAll(".choice").forEach((x) => (x.disabled = true));
     }
+  }
+
+  reset() {
+    this.resetResult.onclick = () => {
+      console.log("Restart Games");
+      this.defaultState();
+
+      // console.log("before", this.user_choice, this.com_choice);
+      this.user_choice = null;
+      this.com_choice = null;
+      // console.log("after", this.user_choice, this.com_choice);
+
+      document.querySelectorAll(".choice").forEach((x) => {
+        x.classList.remove("active_choice");
+        x.disabled = false;
+      });
+    };
   }
 
   play() {
     console.log("Lets play!");
     this.setPlayerListener();
-  }
-
-  reset() {
-    this.resetResult.onclick = () => {
-      this.defaultState();
-      this.result.splice(0, this.result.length);
-      this.user.choice = null;
-      this.com.choice = null;
-      document.querySelectorAll(".choice").forEach((x) => {
-        x.classList.remove("active_choice");
-        x.disabled = false;
-      });
-      console.log("Restart Games");
-    };
   }
 }
 
