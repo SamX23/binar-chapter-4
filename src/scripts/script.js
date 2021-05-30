@@ -124,56 +124,56 @@ class Game extends Rules {
   };
 
   setPlayerListener = () => {
-    this.user.batu[0].addEventListener("click", () => {
+    this.user.batu[0].onclick = () => {
       this.result[0] = this.getUserPick("batu");
       this.user.batu[0].classList.add("active_choice");
       this.user.kertas[0].classList.remove("active_choice");
       this.user.gunting[0].classList.remove("active_choice");
       this.removePlayerListener();
       this.decideResult();
-    });
+    };
 
-    this.user.kertas[0].addEventListener("click", () => {
+    this.user.kertas[0].onclick = () => {
       this.result[0] = this.getUserPick("kertas");
       this.user.batu[0].classList.remove("active_choice");
       this.user.kertas[0].classList.add("active_choice");
       this.user.gunting[0].classList.remove("active_choice");
       this.removePlayerListener();
       this.decideResult();
-    });
+    };
 
-    this.user.gunting[0].addEventListener("click", () => {
+    this.user.gunting[0].onclick = () => {
       this.result[0] = this.getUserPick("gunting");
       this.user.batu[0].classList.remove("active_choice");
       this.user.kertas[0].classList.remove("active_choice");
       this.user.gunting[0].classList.add("active_choice");
       this.removePlayerListener();
       this.decideResult();
-    });
+    };
   };
 
   setComListener = () => {
-    this.com.batu[1].addEventListener("click", () => {
+    this.com.batu[1].onclick = () => {
       this.result[1] = this.getComPick("batu");
       this.com.batu[1].classList.add("active_choice");
       this.com.kertas[1].classList.remove("active_choice");
       this.com.gunting[1].classList.remove("active_choice");
       this.decideResult();
-    });
-    this.com.kertas[1].addEventListener("click", () => {
+    };
+    this.com.kertas[1].onclick = () => {
       this.result[1] = this.getComPick("kertas");
       this.com.batu[1].classList.remove("active_choice");
       this.com.kertas[1].classList.add("active_choice");
       this.com.gunting[1].classList.remove("active_choice");
       this.decideResult();
-    });
-    this.com.gunting[1].addEventListener("click", () => {
+    };
+    this.com.gunting[1].onclick = () => {
       this.result[1] = this.getComPick("gunting");
       this.com.batu[1].classList.remove("active_choice");
       this.com.kertas[1].classList.remove("active_choice");
       this.com.gunting[1].classList.add("active_choice");
       this.decideResult();
-    });
+    };
   };
 
   removePlayerListener = () => {
@@ -207,7 +207,7 @@ class Game extends Rules {
   }
 
   reset() {
-    this.resetResult.addEventListener("click", () => {
+    this.resetResult.onclick = () => {
       this.defaultState();
       this.result.splice(0, this.result.length);
       this.user.choice = null;
@@ -217,7 +217,7 @@ class Game extends Rules {
         x.disabled = false;
       });
       console.log("Restart Games");
-    });
+    };
   }
 }
 
