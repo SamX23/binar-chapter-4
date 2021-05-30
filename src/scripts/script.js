@@ -39,32 +39,35 @@ class Rules {
     this.resultContainer = document.getElementById("vs_result");
   }
 
-  defaultResult = () => {
+  defaultState = () => {
     this.resultContainer.classList.remove("draw");
     this.resultContainer.classList.remove("versus_result");
     this.resultText.innerHTML = "VS";
     this.resultContainer.appendChild(this.resultText);
   };
 
-  winResult = () => {
+  _winResult = () => {
     this.resultContainer.classList.remove("draw");
     this.resultContainer.classList.add("versus_result");
     this.resultText.innerHTML = "PLAYER WIN";
     this.resultContainer.appendChild(this.resultText);
+    console.log("Result : PLAYER Win");
   };
 
-  loseResult = () => {
+  _loseResult = () => {
     this.resultContainer.classList.remove("draw");
     this.resultContainer.classList.add("versus_result");
     this.resultText.innerHTML = "COM WIN";
     this.resultContainer.appendChild(this.resultText);
+    console.log("Result : COM Win");
   };
 
-  drawResult = () => {
+  _drawResult = () => {
     this.resultContainer.classList.add("versus_result");
     this.resultContainer.classList.add("draw");
     this.resultText.innerHTML = "DRAW";
     this.resultContainer.appendChild(this.resultText);
+    console.log("Result : Draw");
   };
 
   decision = (userChoice, botChoice) => {
@@ -73,19 +76,19 @@ class Rules {
       (userChoice === "kertas" && botChoice === "kertas") ||
       (userChoice === "gunting" && botChoice === "gunting")
     ) {
-      return this.drawResult();
+      return this._drawResult();
     } else if (
       (userChoice === "batu" && botChoice === "gunting") ||
       (userChoice === "kertas" && botChoice === "batu") ||
       (userChoice === "gunting" && botChoice === "kertas")
     ) {
-      return this.winResult();
+      return this._winResult();
     } else if (
       (userChoice === "batu" && botChoice === "kertas") ||
       (userChoice === "kertas" && botChoice === "gunting") ||
       (userChoice === "gunting" && botChoice === "batu")
     ) {
-      return this.loseResult();
+      return this._loseResult();
     }
   };
 
@@ -103,7 +106,7 @@ class Game extends Rules {
   _initiation() {
     this.user = new Human();
     this.com = new Bot();
-    this.defaultResult();
+    this.defaultState();
     this.reset();
     console.log("Game Initiated");
   }
@@ -205,14 +208,15 @@ class Game extends Rules {
 
   reset() {
     this.resetResult.addEventListener("click", () => {
-      this.defaultResult();
+      this.defaultState();
       this.result.splice(0, this.result.length);
-      this.user.choice, (this.com.choice = null);
+      this.user.choice = null;
+      this.com.choice = null;
       document.querySelectorAll(".choice").forEach((x) => {
         x.classList.remove("active_choice");
         x.disabled = false;
       });
-      console.log("reset");
+      console.log("Restart Games");
     });
   }
 }
