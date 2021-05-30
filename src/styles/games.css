@@ -172,6 +172,7 @@ nav {
 
 .reset button {
   margin: auto;
+  padding: 0;
   display: flex;
   background: unset;
   border: unset;
