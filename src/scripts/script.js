@@ -40,13 +40,16 @@ class Rules {
     this.com_choice;
   }
 
+  logger = (text) => {
+    console.log("----------");
+    console.log(text);
+  };
+
   defaultState = () => {
     this.resultContainer.classList.remove("draw");
     this.resultContainer.classList.remove("versus_result");
     this.resultText.innerHTML = "VS";
     this.resultContainer.appendChild(this.resultText);
-    this.user_choice = null;
-    this.com_choice = null;
   };
 
   _winResult = () => {
@@ -54,7 +57,7 @@ class Rules {
     this.resultContainer.classList.add("versus_result");
     this.resultText.innerHTML = "PLAYER WIN";
     this.resultContainer.appendChild(this.resultText);
-    console.log("Result : PLAYER Win");
+    this.logger("Result : PLAYER Win, great ! :)");
   };
 
   _loseResult = () => {
@@ -62,7 +65,7 @@ class Rules {
     this.resultContainer.classList.add("versus_result");
     this.resultText.innerHTML = "COM WIN";
     this.resultContainer.appendChild(this.resultText);
-    console.log("Result : COM Win");
+    this.logger("Result : COM Win, YOU lose :(");
   };
 
   _drawResult = () => {
@@ -70,7 +73,7 @@ class Rules {
     this.resultContainer.classList.add("draw");
     this.resultText.innerHTML = "DRAW";
     this.resultContainer.appendChild(this.resultText);
-    console.log("Result : Draw");
+    this.logger("Result : Draw, GG !");
   };
 
   decision = (userChoice, botChoice) => {
@@ -109,18 +112,18 @@ class Game extends Rules {
     this.user = new Human();
     this.com = new Bot();
     this.defaultState();
-    this.reset();
+    this.resetButton();
   }
 
   getUserPick = (choice) => {
     this.user_choice = choice;
-    console.log("Player pick: ", this.user_choice);
+    this.logger(`Player choose: ${this.user_choice}`);
     return this.user_choice;
   };
 
   getComPick = (choice) => {
     this.com_choice = choice;
-    console.log("Com pick: ", this.com_choice);
+    this.logger(`Com choose: ${this.com_choice}`);
     return this.com_choice;
   };
 
@@ -153,32 +156,30 @@ class Game extends Rules {
     };
   };
 
-  setComListener = () => {
-    this.com.batu[1].onclick = () => {
-      this.getComPick("batu");
-      this.com.batu[1].classList.add("active_choice");
-      this.com.kertas[1].classList.remove("active_choice");
-      this.com.gunting[1].classList.remove("active_choice");
-      this.removeComListener();
-      this.decideResult();
-    };
-    this.com.kertas[1].onclick = () => {
-      this.getComPick("kertas");
-      this.com.batu[1].classList.remove("active_choice");
-      this.com.kertas[1].classList.add("active_choice");
-      this.com.gunting[1].classList.remove("active_choice");
-      this.removeComListener();
-      this.decideResult();
-    };
-    this.com.gunting[1].onclick = () => {
-      this.getComPick("gunting");
-      this.com.batu[1].classList.remove("active_choice");
-      this.com.kertas[1].classList.remove("active_choice");
-      this.com.gunting[1].classList.add("active_choice");
-      this.removeComListener();
-      this.decideResult();
-    };
-  };
+  setComListener(choice) {
+    switch (choice) {
+      case "batu":
+        this.getComPick("batu");
+        this.com.batu[1].classList.add("active_choice");
+        this.com.kertas[1].classList.remove("active_choice");
+        this.com.gunting[1].classList.remove("active_choice");
+        break;
+      case "kertas":
+        this.getComPick("kertas");
+        this.com.batu[1].classList.remove("active_choice");
+        this.com.kertas[1].classList.add("active_choice");
+        this.com.gunting[1].classList.remove("active_choice");
+        break;
+      case "gunting":
+        this.getComPick("gunting");
+        this.com.batu[1].classList.remove("active_choice");
+        this.com.kertas[1].classList.remove("active_choice");
+        this.com.gunting[1].classList.add("active_choice");
+        break;
+      default:
+        break;
+    }
+  }
 
   removePlayerListener = () => {
     document.getElementsByClassName("batu")[0].disabled = true;
@@ -186,38 +187,39 @@ class Game extends Rules {
     document.getElementsByClassName("gunting")[0].disabled = true;
   };
 
-  removeComListener = () => {
-    document.getElementsByClassName("batu")[1].disabled = true;
-    document.getElementsByClassName("kertas")[1].disabled = true;
-    document.getElementsByClassName("gunting")[1].disabled = true;
+  result = () => {
+    setInterval(() => {
+      if (this.user_choice && this.com_choice) {
+        this.decision(this.user_choice, this.com_choice);
+      }
+      this.user_choice = null;
+      this.com_choice = null;
+    }, 300);
   };
 
   decideResult() {
-    console.log("Current result: ", this.user_choice, this.com_choice);
-    if (this.user_choice != null) {
-      this.setComListener();
-      // console.log("added com listener", this.user_choice, this.com_choice);
-    } else if (this.user_choice == null) {
-      this.removeComListener();
-      // console.log("remove com listener", this.user_choice, this.com_choice);
-    }
-
-    if (this.user_choice && this.com_choice) {
-      this.decision(this.user_choice, this.com_choice);
-      document.querySelectorAll(".choice").forEach((x) => (x.disabled = true));
+    switch (this.randomizer(3)) {
+      case 2:
+        this.setComListener("batu");
+        this.result();
+        break;
+      case 1:
+        this.setComListener("kertas");
+        this.result();
+        break;
+      case 0:
+        this.setComListener("gunting");
+        this.result();
+        break;
+      default:
+        break;
     }
   }
 
-  reset() {
+  resetButton() {
     this.resetResult.onclick = () => {
-      console.log("Restart Games");
+      this.logger("Game restarted !");
       this.defaultState();
-
-      // console.log("before", this.user_choice, this.com_choice);
-      this.user_choice = null;
-      this.com_choice = null;
-      // console.log("after", this.user_choice, this.com_choice);
-
       document.querySelectorAll(".choice").forEach((x) => {
         x.classList.remove("active_choice");
         x.disabled = false;
@@ -226,10 +228,10 @@ class Game extends Rules {
   }
 
   play() {
-    console.log("Lets play!");
+    this.logger("Lets play traditional games!");
     this.setPlayerListener();
   }
 }
 
-const gas = new Game();
-gas.play();
+const game = new Game();
+game.play();
