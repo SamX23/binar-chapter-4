@@ -99,11 +99,15 @@ nav {
   border-radius: 10%;
 }
 
-.user_choice button:hover {
+.player:nth-child(1) button:hover {
   background-color: var(--skin);
 }
 
-.user_choice > button:active,
+.player:nth-child(3) button {
+  cursor: default;
+}
+
+.player:nth-child(1) > button:active,
 .reset button:active {
   transform: translate(0, 5px);
 }
