@@ -220,9 +220,9 @@ class Game extends Rules {
     this.resetResult.onclick = () => {
       this.logger("Game restarted !");
       this.defaultState();
-      document.querySelectorAll(".choice").forEach((x) => {
-        x.classList.remove("active_choice");
-        x.disabled = false;
+      document.querySelectorAll(".choice").forEach((userButton) => {
+        userButton.classList.remove("active_choice");
+        userButton.disabled = false;
       });
     };
   }
