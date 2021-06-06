@@ -103,6 +103,10 @@ nav {
   background-color: var(--skin);
 }
 
+.player button:enabled {
+  animation: wave 1s;
+}
+
 .player:nth-child(3) button {
   cursor: default;
 }
@@ -168,7 +172,7 @@ nav {
 
 .reset {
   position: absolute;
-  bottom: 0;
+  bottom: 25px;
   left: 0;
   right: 0;
   display: flex;
@@ -181,4 +185,23 @@ nav {
   background: unset;
   border: unset;
   width: 5rem;
+}
+
+.reset button:hover {
+  animation: rotate 1s normal;
+}
+
+@keyframes rotate {
+  50% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes wave {
+  25% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
 }
