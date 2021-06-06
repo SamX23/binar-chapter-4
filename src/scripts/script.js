@@ -7,6 +7,11 @@ class Player {
   }
 }
 
+const Computer = (Base) =>
+  class extends Base {
+    randomPick = (max) => Math.floor(Math.random() * max);
+  };
+
 // Inheritance
 class Player_1 extends Player {
   constructor(batu, kertas, gunting) {
@@ -21,11 +26,6 @@ class Player_1 extends Player {
     this.gunting[0].id = "gunting-player";
   }
 }
-
-const Computer = (Base) =>
-  class extends Base {
-    randomPick = (max) => Math.floor(Math.random() * max);
-  };
 
 // Polymorphism
 class Player_2 extends Computer(Player) {
@@ -242,3 +242,10 @@ class Game extends Rules {
 
 const game = new Game();
 game.play();
+
+/*
+--------------------------------------
+  Bismillah lulus Binar Academy
+  Copyright of Sami Kalammallah
+--------------------------------------
+*/
