@@ -1,3 +1,4 @@
+// Abstract Class
 class Player {
   constructor() {
     this.batu = document.getElementsByClassName("batu");
@@ -6,26 +7,34 @@ class Player {
   }
 }
 
-class Human extends Player {
+// Inheritance
+class Player_1 extends Player {
   constructor(batu, kertas, gunting) {
     super(batu, kertas, gunting);
-    this._initiation();
+    this.#initiation();
   }
 
-  _initiation() {
+  // Encapsulation
+  #initiation() {
     this.batu[0].id = "batu-player";
     this.kertas[0].id = "kertas-player";
     this.gunting[0].id = "gunting-player";
   }
 }
 
-class Bot extends Player {
+const Computer = (Base) =>
+  class extends Base {
+    randomPick = (max) => Math.floor(Math.random() * max);
+  };
+
+// Polymorphism
+class Player_2 extends Computer(Player) {
   constructor(batu, kertas, gunting) {
     super(batu, kertas, gunting);
-    this._initiation();
+    this.#initiation();
   }
 
-  _initiation() {
+  #initiation() {
     this.batu[1].id = "batu-com";
     this.kertas[1].id = "kertas-com";
     this.gunting[1].id = "gunting-com";
@@ -45,7 +54,7 @@ class Rules {
     console.log(text);
   };
 
-  defaultState = () => {
+  _defaultState = () => {
     this.resultContainer.classList.remove("draw");
     this.resultContainer.classList.remove("versus_result");
     this.resultText.innerHTML = "VS";
@@ -97,21 +106,19 @@ class Rules {
       return this._loseResult();
     }
   };
-
-  randomizer = (max) => Math.floor(Math.random() * max);
 }
 
 class Game extends Rules {
   constructor(user_choice, com_choice) {
     super(user_choice, com_choice);
     this.resetResult = document.getElementById("reset");
-    this._initiation();
+    this.#initiation();
   }
 
-  _initiation() {
-    this.user = new Human();
-    this.com = new Bot();
-    this.defaultState();
+  #initiation() {
+    this.user = new Player_1();
+    this.com = new Player_2();
+    this._defaultState();
     this.resetButton();
   }
 
@@ -194,11 +201,11 @@ class Game extends Rules {
       }
       this.user_choice = null;
       this.com_choice = null;
-    }, 300);
+    }, 400);
   };
 
   decideResult() {
-    switch (this.randomizer(3)) {
+    switch (this.com.randomPick(3)) {
       case 2:
         this.setComListener("batu");
         this.result();
@@ -219,7 +226,7 @@ class Game extends Rules {
   resetButton() {
     this.resetResult.onclick = () => {
       this.logger("Game restarted !");
-      this.defaultState();
+      this._defaultState();
       document.querySelectorAll(".choice").forEach((userButton) => {
         userButton.classList.remove("active_choice");
         userButton.disabled = false;
